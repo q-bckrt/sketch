@@ -1,20 +1,26 @@
 createBoard(24);
 
 let trigger = false;
+let random = false;
 let mode = "black";
 
 const draw = document.getElementById('pen');
 const erase = document.getElementById('eraser');
-draw.addEventListener('click', () => { mode = "black"; })
+const clear = document.getElementById('clear');
+const rnd = document.getElementById('rnd');
+
+draw.addEventListener('click', () => { 
+    mode = "black";
+    random = false;
+})
 erase.addEventListener('click', () => { mode = "#EDF6F9"; })
-
-const clearB = document.getElementById('clearb');
-
-clearB.addEventListener('click', () => {
+clear.addEventListener('click', () => {
     const board = document.querySelector('.board');
     board.remove();
     createBoard(slider.value);
 })
+
+rnd.addEventListener('click', () => { random = true } )
 
 document.addEventListener('mousedown', () => { trigger = true; })
 document.addEventListener('mouseup', () => { trigger = false; })
@@ -67,11 +73,20 @@ function createBoard(boardResolution) {
             row.appendChild(pixel);
             for (let k = 0; k < row.childNodes.length; k++) {
                 row.childNodes[k].addEventListener('mousedown', (e) => {
-                    row.childNodes[k].style['background-color'] = mode;
+                    if (random == true) {
+                        row.childNodes[k].style['background'] = randomRGB();
+                        
+                    } else {
+                        row.childNodes[k].style['background'] = mode;
+                    }
             })
                 row.childNodes[k].addEventListener('mouseenter', (e) => {
                     if (trigger == true) {
-                        row.childNodes[k].style['background-color'] = mode;
+                        if (random == true) {
+                            row.childNodes[k].style['background'] = randomRGB();
+                        } else {
+                            row.childNodes[k].style['background'] = mode;
+                        }
                     }
             })
             }
@@ -97,4 +112,12 @@ function roundCorners(row, place) {
         firstNode.style['border-bottom-left-radius'] = "12px";
         lastNode.style['border-bottom-right-radius'] = "12px";
     }
+}
+
+function randomRGB() {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    
+    return "rgb(" + r + "," + g + "," + b + ")";
 }
