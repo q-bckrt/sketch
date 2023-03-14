@@ -71,6 +71,7 @@ function createBoard(boardResolution) {
             pixel.style['box-sizing'] = "border-box";
 
             row.appendChild(pixel);
+        }
             for (let k = 0; k < row.childNodes.length; k++) {
                 row.childNodes[k].addEventListener('mousedown', (e) => {
                     if (random == true) {
@@ -90,7 +91,6 @@ function createBoard(boardResolution) {
                     }
             })
             }
-        }
         if (i == 0) {roundCorners(row, "first")};
         if (i == boardResolution - 1) {roundCorners(row, "last")};
         board.appendChild(row);
