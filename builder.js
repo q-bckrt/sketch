@@ -3,13 +3,23 @@ createBoard(24);
 let trigger = false;
 let mode = "black";
 
-document.addEventListener('mousedown', () => { trigger = true; })
-document.addEventListener('mouseup', () => { trigger = false; })
-const draw = document.getElementById('pen')
-const erase = document.getElementById('eraser')
+const draw = document.getElementById('pen');
+const erase = document.getElementById('eraser');
 draw.addEventListener('click', () => { mode = "black"; })
 erase.addEventListener('click', () => { mode = "#EDF6F9"; })
 
+const clearB = document.getElementById('clearb');
+
+clearB.addEventListener('click', () => {
+    const board = document.querySelector('.board');
+    board.remove();
+    createBoard(slider.value);
+})
+
+document.addEventListener('mousedown', () => { trigger = true; })
+document.addEventListener('mouseup', () => { trigger = false; })
+
+// Moving the slider generates a new board with the selected square count.
 const slider = document.getElementById('sizeSlider');
 
 slider.addEventListener('change', () => {
@@ -23,12 +33,17 @@ slider.addEventListener('mousemove', () => {
     val.innerHTML = slider.value;
 })
 
+const picker = document.getElementById("picker");
+picker.addEventListener("input", () => {
+    mode = event.target.value;
+})
+
 // This function generates the drawing board.
 // boardResolution is the number of rows and columns.
 function createBoard(boardResolution) {
     const board = document.createElement('div');
-    const menu = document.querySelector('.menu');
     const frame = document.querySelector('.frame');
+    const menu = document.querySelector('.menu');
    
     board.classList.add('board');
 
@@ -83,5 +98,3 @@ function roundCorners(row, place) {
         lastNode.style['border-bottom-right-radius'] = "12px";
     }
 }
-
-

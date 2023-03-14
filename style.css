@@ -11,7 +11,7 @@ h1 {
 
 body{
 	font-family: Helvetica, Arial, sans-serif;
-    background-color: #EDF6F9;
+    background-color: #EDF6F2;
 }
 
 .frame {
@@ -44,4 +44,15 @@ body{
     height: 600px;
     margin: auto;
     margin-right: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.color-picker {
+    -webkit-appearance: none; 
+    appearance: none;
+    border: none;
+    border-color: transparent;
 }
