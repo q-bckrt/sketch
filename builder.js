@@ -3,6 +3,7 @@ createBoard(24);
 // State variables
 let trigger = false;
 let random = false;
+let rainbow = false;
 let mode = "black";
 
 // Set up the menu's buttons
@@ -11,12 +12,14 @@ const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
     mode = "black";
     random = false;
+    rainbow = false;
 })
 
 const erase = document.getElementById('eraser');
 erase.addEventListener('click', () => {
     mode = "#EDF6F9";
     random = false;
+    rainbow = false;
 })
 
 const clear = document.getElementById('clear');
@@ -26,8 +29,17 @@ clear.addEventListener('click', () => {
     createBoard(slider.value);
 })
 
+const rnb = document.getElementById('rnb');
+rnb.addEventListener('click', () => {
+    rainbow = true;
+    random = false;
+})
+
 const rnd = document.getElementById('rnd');
-rnd.addEventListener('click', () => { random = true } )
+rnd.addEventListener('click', () => {
+    random = true;
+    rainbow = false;
+} )
 
 // Allows continuous drawing
 document.addEventListener('mousedown', () => { trigger = true; })
@@ -95,19 +107,21 @@ function setupSquares(row) {
         row.childNodes[i].addEventListener('mousedown', (e) => {
             if (random == true) {
                 row.childNodes[i].style['background'] = randomRGB();
+            } else if (rainbow == true) {
+                row.childNodes[i].style['background'] = rainbowRGB();
             } else {
                 row.childNodes[i].style['background'] = mode;
             }
-    })
+        })
         row.childNodes[i].addEventListener('mouseenter', (e) => {
-            if (trigger == true) {
-                if (random == true) {
-                    row.childNodes[i].style['background'] = randomRGB();
-                } else {
-                    row.childNodes[i].style['background'] = mode;
-                }
+            if (random == true && trigger == true) {
+                row.childNodes[i].style['background'] = randomRGB();
+            } else if (rainbow == true && trigger == true) {
+                row.childNodes[i].style['background'] = rainbowRGB();
+            } else if (trigger == true) {
+                row.childNodes[i].style['background'] = mode;
             }
-    })
+        })
     }
 }
 
@@ -135,3 +149,34 @@ function randomRGB() {
     return "rgb(" + r + "," + g + "," + b + ")";
 }
 
+// Yields rainbow css-formated rgb values.
+let nextColor = 0;
+const rnbColors = [
+    [255, 0, 0],    // red
+    [255, 125, 0],  // orange
+    [255, 255, 0],  // yellow
+    [125, 255, 0],  // spring green
+    [0, 255, 0],    // green
+    [0, 255, 125],  // turquoise
+    [0, 255, 255],  // cyan
+    [0, 125, 255],  // ocean
+    [0, 0, 255],    // blue
+    [125, 0, 255],  // violet
+    [255, 0, 255],  // magenta
+    [255, 0, 125]   // raspberry
+]
+
+function rainbowRGB() {
+    let r = rnbColors[nextColor][0];
+    let g = rnbColors[nextColor][1];
+    let b = rnbColors[nextColor][2];
+    let rgb = "rgb(" + r + "," + g + "," + b + ")";
+
+    if (nextColor == 11) {
+        nextColor = 0;
+    } else {
+        nextColor += 1;
+    }
+
+    return rgb;
+}
