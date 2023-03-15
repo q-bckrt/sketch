@@ -1,33 +1,42 @@
 createBoard(24);
 
+// State variables
 let trigger = false;
 let random = false;
 let mode = "black";
 
-const draw = document.getElementById('pen');
-const erase = document.getElementById('eraser');
-const clear = document.getElementById('clear');
-const rnd = document.getElementById('rnd');
+// Set up the menu's buttons
 
+const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
     mode = "black";
     random = false;
 })
-erase.addEventListener('click', () => { mode = "#EDF6F9"; })
+
+const erase = document.getElementById('eraser');
+erase.addEventListener('click', () => {
+    mode = "#EDF6F9";
+    random = false;
+})
+
+const clear = document.getElementById('clear');
 clear.addEventListener('click', () => {
     const board = document.querySelector('.board');
     board.remove();
     createBoard(slider.value);
 })
 
+const rnd = document.getElementById('rnd');
 rnd.addEventListener('click', () => { random = true } )
 
+// Allows continuous drawing
 document.addEventListener('mousedown', () => { trigger = true; })
 document.addEventListener('mouseup', () => { trigger = false; })
 
 // Moving the slider generates a new board with the selected square count.
 const slider = document.getElementById('sizeSlider');
 
+// Set up resoluton's slider
 slider.addEventListener('change', () => {
     const board = document.querySelector('.board');
     board.remove();
@@ -39,13 +48,13 @@ slider.addEventListener('mousemove', () => {
     val.innerHTML = slider.value;
 })
 
+// Set up color's picker
 const picker = document.getElementById("picker");
 picker.addEventListener("input", () => {
     mode = event.target.value;
 })
 
-// This function generates the drawing board.
-// boardResolution is the number of rows and columns.
+// Generates the drawing board.
 function createBoard(boardResolution) {
     const board = document.createElement('div');
     const frame = document.querySelector('.frame');
@@ -61,7 +70,6 @@ function createBoard(boardResolution) {
         row.style['flex-grow'] = "1";
         row.style['flex-direction'] = "row";
 
-
         for (let j = 0; j < boardResolution; j++) {
             const pixel = document.createElement('div');
             pixel.classList.add('pixel')
@@ -72,25 +80,8 @@ function createBoard(boardResolution) {
 
             row.appendChild(pixel);
         }
-            for (let k = 0; k < row.childNodes.length; k++) {
-                row.childNodes[k].addEventListener('mousedown', (e) => {
-                    if (random == true) {
-                        row.childNodes[k].style['background'] = randomRGB();
-                        
-                    } else {
-                        row.childNodes[k].style['background'] = mode;
-                    }
-            })
-                row.childNodes[k].addEventListener('mouseenter', (e) => {
-                    if (trigger == true) {
-                        if (random == true) {
-                            row.childNodes[k].style['background'] = randomRGB();
-                        } else {
-                            row.childNodes[k].style['background'] = mode;
-                        }
-                    }
-            })
-            }
+        setupSquares(row);
+
         if (i == 0) {roundCorners(row, "first")};
         if (i == boardResolution - 1) {roundCorners(row, "last")};
         board.appendChild(row);
@@ -98,8 +89,29 @@ function createBoard(boardResolution) {
     frame.insertBefore(board, menu);
 }
 
-// Used by createBoard() to make the corner's pixel's borders
-// match the curvature of the board's border.
+// Set up the squares for drawing
+function setupSquares(row) {
+    for (let i = 0; i < row.childNodes.length; i++) {
+        row.childNodes[i].addEventListener('mousedown', (e) => {
+            if (random == true) {
+                row.childNodes[i].style['background'] = randomRGB();
+            } else {
+                row.childNodes[i].style['background'] = mode;
+            }
+    })
+        row.childNodes[i].addEventListener('mouseenter', (e) => {
+            if (trigger == true) {
+                if (random == true) {
+                    row.childNodes[i].style['background'] = randomRGB();
+                } else {
+                    row.childNodes[i].style['background'] = mode;
+                }
+            }
+    })
+    }
+}
+
+// Make the corner's squares match the curvature of the board.
 function roundCorners(row, place) {
     var firstNode = row.firstChild;
     var lastNode = row.lastChild;
@@ -114,6 +126,7 @@ function roundCorners(row, place) {
     }
 }
 
+// Generate random css-formated rgb values.
 function randomRGB() {
     let r = Math.floor(Math.random() * 255);
     let g = Math.floor(Math.random() * 255);
@@ -121,3 +134,4 @@ function randomRGB() {
     
     return "rgb(" + r + "," + g + "," + b + ")";
 }
+
