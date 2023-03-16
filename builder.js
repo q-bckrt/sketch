@@ -5,9 +5,9 @@ let trigger = false;
 let random = false;
 let rainbow = false;
 let mode = "black";
+let bg = "#EDF6F9"; 
 
 // Set up the menu's buttons
-
 const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
     mode = "black";
@@ -17,7 +17,7 @@ draw.addEventListener('click', () => {
 
 const erase = document.getElementById('eraser');
 erase.addEventListener('click', () => {
-    mode = "#EDF6F9";
+    mode = bg;
     random = false;
     rainbow = false;
 })
@@ -60,20 +60,14 @@ slider.addEventListener('mousemove', () => {
     val.innerHTML = slider.value;
 })
 
-// Set up color's picker
+// Set up pen color picker
 const picker = document.getElementById("picker");
 picker.addEventListener("input", () => {
     mode = event.target.value;
 })
 
 // Generates the drawing board.
-function createBoard(boardResolution) {
-    const board = document.createElement('div');
-    const frame = document.querySelector('.frame');
-    const menu = document.querySelector('.menu');
-   
-    board.classList.add('board');
-
+function populateBoard(board, boardResolution) {
     for (let i = 0; i < boardResolution; i++) {
         const row = document.createElement('div');
         row.classList.add('row')
@@ -98,6 +92,18 @@ function createBoard(boardResolution) {
         if (i == boardResolution - 1) {roundCorners(row, "last")};
         board.appendChild(row);
     }
+}
+
+
+function createBoard(boardResolution) {
+    const board = document.createElement('div');
+    const frame = document.querySelector('.frame');
+    const menu = document.querySelector('.menu');
+   
+    board.classList.add('board');
+
+    populateBoard(board, boardResolution);
+
     frame.insertBefore(board, menu);
 }
 
