@@ -2,24 +2,31 @@ createBoard(24);
 
 // State variables
 let trigger = false;
+let drawmode = true;
 let random = false;
 let rainbow = false;
+let light = false;
+let dark = false;
 let mode = "black";
-let bg = "#EDF6F9"; 
+let bg = "#EDF6F9";
 
 // Set up the menu's buttons
 const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
     mode = "black";
+    drawmode = true;
     random = false;
     rainbow = false;
+    light = false;
 })
 
 const erase = document.getElementById('eraser');
 erase.addEventListener('click', () => {
     mode = bg;
+    drawmode = false;
     random = false;
     rainbow = false;
+    light = false;
 })
 
 const clear = document.getElementById('clear');
@@ -32,14 +39,28 @@ clear.addEventListener('click', () => {
 const rnb = document.getElementById('rnb');
 rnb.addEventListener('click', () => {
     rainbow = true;
+    drawmode = false;
     random = false;
+    light = false;
 })
 
 const rnd = document.getElementById('rnd');
 rnd.addEventListener('click', () => {
     random = true;
+    drawmode = false;
     rainbow = false;
+    light = false;
 } )
+
+const lighten = document.getElementById('lighten');
+lighten.addEventListener('click', () => {
+    light = true;
+    drawmode = false;
+    random = false;
+    rainbow = false;
+    console.log("gne");
+})
+
 
 // Allows continuous drawing
 document.addEventListener('mousedown', () => { trigger = true; })
@@ -92,6 +113,7 @@ function populateBoard(board, boardResolution) {
         if (i == boardResolution - 1) {roundCorners(row, "last")};
         board.appendChild(row);
     }
+    console.log(board);
 }
 
 
@@ -111,20 +133,26 @@ function createBoard(boardResolution) {
 function setupSquares(row) {
     for (let i = 0; i < row.childNodes.length; i++) {
         row.childNodes[i].addEventListener('mousedown', (e) => {
+            if (light == true) {
+                row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
+            }
             if (random == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true) {
                 row.childNodes[i].style['background'] = rainbowRGB();
-            } else {
+            } else if (drawmode == true) {
                 row.childNodes[i].style['background'] = mode;
             }
         })
         row.childNodes[i].addEventListener('mouseenter', (e) => {
+            if (light == true && trigger == true) {
+                row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
+            }
             if (random == true && trigger == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true && trigger == true) {
                 row.childNodes[i].style['background'] = rainbowRGB();
-            } else if (trigger == true) {
+            } else if (drawmode == true && trigger == true) {
                 row.childNodes[i].style['background'] = mode;
             }
         })
@@ -185,4 +213,31 @@ function rainbowRGB() {
     }
 
     return rgb;
+}
+
+// Generate a css-formated color 10% lighter than provided in argument
+function addTenPercent(value) {
+    let biggerValue = 0;
+
+    if (value == 0) {
+        biggerValue = 10;
+    } else if (value > 229.5) {
+        biggerValue = 255;
+    } else {
+        biggerValue = Math.ceil(value + (value * 0.1));
+    }
+
+    return biggerValue;
+}
+
+function lightenRGB(baseColor) {
+    const raw = getComputedStyle(baseColor).backgroundColor;
+    const og = raw.match(
+        /rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/
+        );
+    let r = addTenPercent(parseInt(og[1])); 
+    let g = addTenPercent(parseInt(og[2])); 
+    let b = addTenPercent(parseInt(og[3])); 
+
+    return "rgb(" + r + "," + g + "," + b + ")";
 }
