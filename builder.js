@@ -12,7 +12,7 @@ let mode = "black";
 // Set up the menu's buttons
 const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
-    mode = "black";
+    // mode = "black";
     drawmode = true;
     random = false;
     rainbow = false;
@@ -239,7 +239,6 @@ function lightenRGB(baseColor) {
     let g = addTenPercent(parseInt(og[2])); 
     let b = addTenPercent(parseInt(og[3])); 
     let rgb = "rgb(" + r + "," + g + "," + b + ")";
-    //console.log(raw);
-    //console.log(rgb);
+
     return rgb;
 }
