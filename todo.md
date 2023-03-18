@@ -9,16 +9,17 @@ code readibality too.
 *
 
 - **Known Bugs:**
-    - The pen doesn't work after clearing the board
-        (by the clear button or the size slider)
 
-- Improve style
-    - Improve overall style, color theme etc..
-    - Style the range slider
-    - Fix the color picker issue where we don't currently manage to 
-        remove it's default style.
 
-- Refactor code
-    - Is generally a mess, needs refactoring for more readability
-    - Could probably be smaller too
-    - Could maybe be faster
+- **Features:**
+
+    - Improve style
+        - Improve overall style, color theme etc..
+        - Style the range slider
+        - Fix the color picker issue where we don't currently manage to 
+            remove it's default style.
+
+    - Refactor code
+        - Is generally a mess, needs refactoring for more readability
+        - Could probably be smaller too
+        - Could maybe be faster
