@@ -1,3 +1,4 @@
+let bg = "#EDF6F9";
 createBoard(24);
 
 // State variables
@@ -6,9 +7,7 @@ let drawmode = true;
 let random = false;
 let rainbow = false;
 let light = false;
-let dark = false;
 let mode = "black";
-let bg = "#EDF6F9";
 
 // Set up the menu's buttons
 const draw = document.getElementById('pen');
@@ -23,7 +22,7 @@ draw.addEventListener('click', () => {
 const erase = document.getElementById('eraser');
 erase.addEventListener('click', () => {
     mode = bg;
-    drawmode = false;
+    drawmode = true;
     random = false;
     rainbow = false;
     light = false;
@@ -91,7 +90,7 @@ picker.addEventListener("input", () => {
 function populateBoard(board, boardResolution) {
     for (let i = 0; i < boardResolution; i++) {
         const row = document.createElement('div');
-        row.classList.add('row')
+        //row.classList.add('row')
 
         row.style['display'] = "flex";
         row.style['flex-grow'] = "1";
@@ -104,6 +103,7 @@ function populateBoard(board, boardResolution) {
             pixel.style['border'] = '0.5px solid lightgrey';
             pixel.style['flex-grow'] = "1";
             pixel.style['box-sizing'] = "border-box";
+            pixel.style['background'] = bg;
 
             row.appendChild(pixel);
         }
@@ -132,11 +132,12 @@ function createBoard(boardResolution) {
 // Set up the squares for drawing
 function setupSquares(row) {
     for (let i = 0; i < row.childNodes.length; i++) {
-        row.childNodes[i].addEventListener('mousedown', (e) => {
+
+            row.childNodes[i].addEventListener('mousedown', (e) => {
             if (light == true) {
+                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
-            }
-            if (random == true) {
+            } else if (random == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true) {
                 row.childNodes[i].style['background'] = rainbowRGB();
@@ -147,13 +148,12 @@ function setupSquares(row) {
         row.childNodes[i].addEventListener('mouseenter', (e) => {
             if (light == true && trigger == true) {
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
-            }
-            if (random == true && trigger == true) {
+            } else if (random == true && trigger == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true && trigger == true) {
                 row.childNodes[i].style['background'] = rainbowRGB();
             } else if (drawmode == true && trigger == true) {
-                row.childNodes[i].style['background'] = mode;
+               row.childNodes[i].style['background'] = mode;
             }
         })
     }
@@ -224,7 +224,7 @@ function addTenPercent(value) {
     } else if (value > 229.5) {
         biggerValue = 255;
     } else {
-        biggerValue = Math.ceil(value + (value * 0.1));
+        biggerValue = Math.ceil(value + (0.1 * (255 - value)));
     }
 
     return biggerValue;
@@ -238,6 +238,8 @@ function lightenRGB(baseColor) {
     let r = addTenPercent(parseInt(og[1])); 
     let g = addTenPercent(parseInt(og[2])); 
     let b = addTenPercent(parseInt(og[3])); 
-
-    return "rgb(" + r + "," + g + "," + b + ")";
+    let rgb = "rgb(" + r + "," + g + "," + b + ")";
+    //console.log(raw);
+    //console.log(rgb);
+    return rgb;
 }
