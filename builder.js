@@ -7,6 +7,7 @@ let drawmode = true;
 let random = false;
 let rainbow = false;
 let light = false;
+let dark = false;
 let mode = "black";
 
 // Set up the menu's buttons
@@ -17,6 +18,7 @@ draw.addEventListener('click', () => {
     random = false;
     rainbow = false;
     light = false;
+    dark = false;
 })
 
 const erase = document.getElementById('eraser');
@@ -26,6 +28,7 @@ erase.addEventListener('click', () => {
     random = false;
     rainbow = false;
     light = false;
+    dark = false;
 })
 
 const clear = document.getElementById('clear');
@@ -41,6 +44,7 @@ rnb.addEventListener('click', () => {
     drawmode = false;
     random = false;
     light = false;
+    dark = false;
 })
 
 const rnd = document.getElementById('rnd');
@@ -49,6 +53,7 @@ rnd.addEventListener('click', () => {
     drawmode = false;
     rainbow = false;
     light = false;
+    dark = false;
 } )
 
 const lighten = document.getElementById('lighten');
@@ -57,9 +62,17 @@ lighten.addEventListener('click', () => {
     drawmode = false;
     random = false;
     rainbow = false;
-    console.log("gne");
+    dark = false;
 })
 
+const darken = document.getElementById('darken');
+darken.addEventListener('click', () => {
+    light = false;
+    drawmode = false;
+    random = false;
+    rainbow = false;
+    dark = true;
+})
 
 // Allows continuous drawing
 document.addEventListener('mousedown', () => { trigger = true; })
@@ -137,6 +150,9 @@ function setupSquares(row) {
             if (light == true) {
                 console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
+            } else if (dark == true) {
+                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
+                row.childNodes[i].style['background'] = darkenRGB(row.childNodes[i]);
             } else if (random == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true) {
@@ -148,6 +164,9 @@ function setupSquares(row) {
         row.childNodes[i].addEventListener('mouseenter', (e) => {
             if (light == true && trigger == true) {
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
+            } else if (dark == true && trigger == true) {
+                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
+                row.childNodes[i].style['background'] = darkenRGB(row.childNodes[i]);
             } else if (random == true && trigger == true) {
                 row.childNodes[i].style['background'] = randomRGB();
             } else if (rainbow == true && trigger == true) {
@@ -238,6 +257,32 @@ function lightenRGB(baseColor) {
     let r = addTenPercent(parseInt(og[1])); 
     let g = addTenPercent(parseInt(og[2])); 
     let b = addTenPercent(parseInt(og[3])); 
+    let rgb = "rgb(" + r + "," + g + "," + b + ")";
+
+    return rgb;
+}
+
+// Generate a css-formated color 10% darken than provided in argument
+function remTenPercent(value) {
+    let smallerValue = 0;
+
+    if (value < 25.5) {
+        smallerValue = 0;
+    } else {
+        smallerValue = Math.floor(value * 0.9);
+    }
+
+    return smallerValue;
+}
+
+function darkenRGB(baseColor) {
+    const raw = getComputedStyle(baseColor).backgroundColor;
+    const og = raw.match(
+        /rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/
+        );
+    let r = remTenPercent(parseInt(og[1])); 
+    let g = remTenPercent(parseInt(og[2])); 
+    let b = remTenPercent(parseInt(og[3])); 
     let rgb = "rgb(" + r + "," + g + "," + b + ")";
 
     return rgb;
