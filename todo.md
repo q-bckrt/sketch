@@ -13,3 +13,8 @@ code readibality too.
     - Improve overall style, color theme etc..
     - Fix the color picker issue where we don't currently manage to 
         remove it's default style.
+
+- Refactor code
+    - Is generally a mess, needs refactoring for more readability
+    - Could probably be smaller too
+    - Could maybe be faster
