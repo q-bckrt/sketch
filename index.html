@@ -11,21 +11,22 @@
     <div class="frame">
         <div class="menu">
             <div>
+                <input type="color" class="color-picker" id="picker">
+            </div>
+            <div class="drawing-modes">
+                <div><button class="mode-btn" id="pen">Pen</button></div>
+                <div><button class="mode-btn" id="eraser">Eraser</button></div>
+                <div><button class="mode-btn" id="rnd">Random</button></div>
+                <div><button class="mode-btn" id="rnb">Rainbow</button></div>
+                <div><button class="mode-btn" id="lighten">Lighten</button></div>
+                <div><button class="mode-btn" id="darken">Darken</button></div>
+            </div>
+            <div><button class="clear-btn" id="clear">clear</button></div>
+            <div class="choose-res">
                 <input type="range" id="sizeSlider" name="sizeSlider"
                        min = "1" max = "64" value = "24">
                 <p class="sizeValue">24</p>
             </div>
-            <div>
-                <p>Pen</p>
-                <input type="color" class="color-picker" id="picker">
-            </div>
-            <div><button id="pen">draw</button></div>
-            <div><button id="rnd">rnd</button></div>
-            <div><button id="rnb">rainbow</button></div>
-            <div><button id="lighten">lighten</button></div>
-            <div><button id="darken">darken</button></div>
-            <div><button id="eraser">erase</button></div>
-            <div><button id="clear">clear</button></div>
         </div>
     </div>
 </body>
