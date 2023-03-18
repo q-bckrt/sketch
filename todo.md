@@ -12,14 +12,19 @@ code readibality too.
 
 
 - **Features:**
+    - Some sort of confirmation for when changing the size and clearing.
+        Maybe merge this feature with the clear button?
 
+- **Other**
+    - Refactor code
+        - Is generally a mess, needs refactoring for more readability
+        - Could probably be smaller too
+        - Could maybe be faster
+    
     - Improve style
         - Improve overall style, color theme etc..
         - Style the range slider
         - Fix the color picker issue where we don't currently manage to 
             remove it's default style.
 
-    - Refactor code
-        - Is generally a mess, needs refactoring for more readability
-        - Could probably be smaller too
-        - Could maybe be faster
+
