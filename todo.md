@@ -8,6 +8,10 @@ of objects where I can store their state. This will probably allow for more
 code readibality too.
 *
 
+- **Known Bugs:**
+    - The pen doesn't work after clearing the board
+        (by the clear button or the size slider)
+
 - Improve style
     - Improve overall style, color theme etc..
     - Style the range slider
