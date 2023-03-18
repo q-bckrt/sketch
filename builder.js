@@ -139,7 +139,8 @@ function createBoard(boardResolution) {
 
     populateBoard(board, boardResolution);
 
-    frame.insertBefore(board, menu);
+    // frame.insertBefore(board, menu);
+    frame.appendChild(board);
 }
 
 // Set up the squares for drawing
