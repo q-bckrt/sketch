@@ -9,8 +9,8 @@ code readibality too.
 *
 
 - Improve style
-    - Implement the menu styling, button arrangement etc..
     - Improve overall style, color theme etc..
+    - Style the range slider
     - Fix the color picker issue where we don't currently manage to 
         remove it's default style.
 
