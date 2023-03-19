@@ -19,7 +19,4 @@ code readibality too.
         - Could maybe be faster
     
     - Improve style
-        - Improve overall style, color theme etc..
         - Make the buttons reactive
-        - Use SVG logos on buttons
-            - Replace text with logo when hovering, or vice-versa?

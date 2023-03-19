@@ -8,7 +8,7 @@ h1 {
     font-family: 'Pangolin', Helvetica, Arial, sans-serif;
     font-size: 94px;
     text-align: center;
-    color: #006D77;
+    color: #4a4a4a;
     margin: 0px;
 }
 
@@ -18,8 +18,9 @@ body {
 }
 
 .frame {
-    background-color: #FFDDD2;
-    border: 12px solid #E29578;
+    background-color: #ffe6f6;
+    background-color: #647e9e;
+    border: 12px solid #4a4a4a;
     border-radius: 24px;
     width: 1000px;
     height: 700px;
@@ -29,7 +30,7 @@ body {
 
 .board {
     background-color: #EDF6F9;
-    border: 12px solid #E29578;
+    border: 12px solid #4a4a4a;
     border-radius: 24px;
     width: 600px;
     height: 600px;
@@ -40,8 +41,8 @@ body {
 }
 
 .menu {
-    background-color: #83C5BE;
-    border: 12px solid #E29578;
+    background-color: #a7ddfa;
+    border: 12px solid #4a4a4a;
     border-radius: 24px;
     width: 242px;
     height: 600px;
@@ -66,9 +67,10 @@ body {
     width: 80px;
     height: 50px;
     margin: 16px;
-    border: 4px solid #E29578;
+    border: 4px solid #4a4a4a;
     border-radius: 6px;
     cursor: pointer;
+    background-color: #EFEFEF;
 }
 
 .clear-btn {
@@ -76,10 +78,11 @@ body {
     font-size: 16px;
     width: 200px;
     height: 50px;
-    border: 4px solid #E29578;
+    border: 4px solid #4a4a4a;
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 40px;
+    background-color: #EFEFEF;
 }
 
 .choose-res {
@@ -93,6 +96,7 @@ body {
     font-size: 20px;
     text-align: center;
     margin-top: 20px;
+    color: #4a4a4a;
 }
 
 .picker-label {
@@ -169,7 +173,7 @@ input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 8.4px;
     cursor: pointer;
-    background: #E29578;
+    background: #4a4a4a;
     border-radius: 2px;
 }
   
@@ -178,7 +182,7 @@ input[type=range]::-moz-range-track {
     width: 100%;
     height: 8.4px;
     cursor: pointer;
-    background: #E29578;
+    background: #4a4a4a;
     border-radius: 2px;
 }
 
