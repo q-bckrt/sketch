@@ -86,6 +86,19 @@ body {
     background-color: #EFEFEF;
 }
 
+.mode-btn, .clear-btn {
+    -webkit-box-shadow: 6px 6px 4px -5px rgba(0,4,10,1);
+    -moz-box-shadow: 6px 6px 4px -5px rgba(0,4,10,1);
+    box-shadow: 6px 6px 4px -5px rgba(0,4,10,1);
+}
+
+.mode-btn:hover, .clear-btn:hover {
+    background-color: #cddcf7;
+    -webkit-box-shadow: 6px 6px 4px -4px rgba(0,4,10,1);
+    -moz-box-shadow: 6px 6px 4px -4px rgba(0,4,10,1);
+    box-shadow: 6px 6px 4px -4px rgba(0,4,10,1);
+}
+
 .choose-res {
     display: flex;
     flex-direction: column;
@@ -104,13 +117,13 @@ body {
     font-family: 'Pangolin', Helvetica, Arial, sans-serif;
     font-size: 20px;
     text-align: center;
-    margin: 10px 0 0 0;
+    margin: 20px 0 10px 0;
 }
 
 /* Color Picker styles */
 /***********************/
 input[type="color"] {
-    margin-top: 20px;
+    margin-bottom: 20px;
     -webkit-appearance: none; 
     appearance: none;
     background: transparent;

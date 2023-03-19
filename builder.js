@@ -1,4 +1,4 @@
-let bg = "#EDF6F9";
+let bg = "white";
 createBoard(24);
 
 // State variables
