@@ -37,6 +37,11 @@ clear.addEventListener('click', () => {
     const board = document.querySelector('.board');
     board.remove();
     createBoard(slider.value);
+    if (light == true || dark == true) {
+        light = false;
+        dark = false;
+        drawmode = true;
+    }
 })
 
 const rnb = document.getElementById('rnb');
@@ -99,7 +104,6 @@ picker.addEventListener("input", () => {
 function populateBoard(board, boardResolution) {
     for (let i = 0; i < boardResolution; i++) {
         const row = document.createElement('div');
-        //row.classList.add('row')
 
         row.style['display'] = "flex";
         row.style['flex-grow'] = "1";
@@ -122,7 +126,6 @@ function populateBoard(board, boardResolution) {
         if (i == boardResolution - 1) {roundCorners(row, "last")};
         board.appendChild(row);
     }
-    console.log(board);
 }
 
 
@@ -145,10 +148,8 @@ function setupSquares(row) {
 
             row.childNodes[i].addEventListener('mousedown', (e) => {
             if (light == true) {
-                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
             } else if (dark == true) {
-                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
                 row.childNodes[i].style['background'] = darkenRGB(row.childNodes[i]);
             } else if (random == true) {
                 row.childNodes[i].style['background'] = randomRGB();
@@ -162,7 +163,6 @@ function setupSquares(row) {
             if (light == true && trigger == true) {
                 row.childNodes[i].style['background'] = lightenRGB(row.childNodes[i]);
             } else if (dark == true && trigger == true) {
-                console.log(getComputedStyle(row.childNodes[i])["backgroundColor"]);
                 row.childNodes[i].style['background'] = darkenRGB(row.childNodes[i]);
             } else if (random == true && trigger == true) {
                 row.childNodes[i].style['background'] = randomRGB();
