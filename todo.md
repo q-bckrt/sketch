@@ -10,10 +10,7 @@ code readibality too.
 
 - **Known Bugs:**
 
-
-- **Features:**
-    - Some sort of confirmation for when changing the size and clearing.
-        Maybe merge this feature with the clear button?
+- **Features**
 
 - **Other**
     - Refactor code
@@ -26,7 +23,3 @@ code readibality too.
         - Make the buttons reactive
         - Use SVG logos on buttons
             - Replace text with logo when hovering, or vice-versa?
-        - Fix the color picker issue where we don't currently manage to 
-            remove it's default style.
-
-

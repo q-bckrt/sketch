@@ -78,16 +78,8 @@ darken.addEventListener('click', () => {
 document.addEventListener('mousedown', () => { trigger = true; })
 document.addEventListener('mouseup', () => { trigger = false; })
 
-// Moving the slider generates a new board with the selected square count.
+// Select new board size
 const slider = document.getElementById('sizeSlider');
-
-// Set up resoluton's slider
-slider.addEventListener('change', () => {
-    const board = document.querySelector('.board');
-    board.remove();
-    createBoard(slider.value);
-})
-
 slider.addEventListener('mousemove', () => {
     const val = document.querySelector('.sizeValue');
     val.innerHTML = slider.value;
@@ -97,6 +89,8 @@ slider.addEventListener('mousemove', () => {
 const picker = document.getElementById("picker");
 picker.addEventListener("input", () => {
     mode = event.target.value;
+    const pickerLabel = document.getElementById("picker-label");
+    pickerLabel.style['color'] = mode;
 })
 
 // Generates the drawing board.
