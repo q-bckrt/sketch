@@ -8,12 +8,11 @@ let random = false;
 let rainbow = false;
 let light = false;
 let dark = false;
-let mode = "black";
+let mode = "#080929";
 
 // Set up the menu's buttons
 const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
-    // mode = "black";
     drawmode = true;
     random = false;
     rainbow = false;
