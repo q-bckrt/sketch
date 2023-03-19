@@ -8,11 +8,13 @@ let random = false;
 let rainbow = false;
 let light = false;
 let dark = false;
+let color_pick = "#080929"; 
 let mode = "#080929";
 
 // Set up the menu's buttons
 const draw = document.getElementById('pen');
 draw.addEventListener('click', () => { 
+    mode = color_pick;
     drawmode = true;
     random = false;
     rainbow = false;
@@ -88,6 +90,7 @@ slider.addEventListener('mousemove', () => {
 const picker = document.getElementById("picker");
 picker.addEventListener("input", () => {
     mode = event.target.value;
+    color_pick = event.target.value;
     const pickerLabel = document.getElementById("picker-label");
     pickerLabel.style['color'] = mode;
 })
